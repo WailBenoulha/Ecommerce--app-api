@@ -12,6 +12,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 
 
 class UserAPIView(APIView):
+    serializer_class = UserSerializer
+    queryset = CustomUser
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 

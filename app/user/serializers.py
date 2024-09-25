@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = ['id','email','first_name','last_name','phone_number','password']
 
 
 class AuthTokenSerializer(serializers.Serializer):

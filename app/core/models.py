@@ -33,7 +33,7 @@ class Tag(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
-    tag = models.ManyToManyField(Tag)
+    tag = models.ManyToManyField(Tag,blank=True)
     create_by = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='products')
     date_posted = models.DateTimeField(default=timezone.now)
 

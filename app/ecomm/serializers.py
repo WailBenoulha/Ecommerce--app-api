@@ -1,20 +1,19 @@
 from rest_framework import serializers
-from core.models import Tag,Product,Order
+from core.models import Product,Order,Category
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
-
-
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = '__all__'
+        fields = ('id','name','price','get_absolute_url','description','get_image','get_thumbnail')
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id','name')    

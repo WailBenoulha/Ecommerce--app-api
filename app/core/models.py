@@ -90,6 +90,13 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='order')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.CharField()
+    address = models.CharField(max_length=255)
+    zipcode = models.CharField(max_length=255)
+    place = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
     date_order = models.DateTimeField(default=timezone.now)
     product = models.ManyToManyField(Product)
-    order_by = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='order')

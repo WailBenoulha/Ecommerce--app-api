@@ -5,7 +5,15 @@ from core.models import Product,Order,Category
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id','name','price','get_absolute_url','description','get_image','get_thumbnail')
+        fields = (
+            "id",
+            "name",
+            "get_absolute_url",
+            "description",
+            "price",
+            "get_image",
+            "get_thumbnail"
+        )
 
 
 class OrderSerializer(serializers.ModelSerializer):

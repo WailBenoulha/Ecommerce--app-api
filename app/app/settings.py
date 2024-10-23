@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'bnlh',
         'USER': 'bnlh',
         'PASSWORD': '0000',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

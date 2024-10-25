@@ -15,11 +15,22 @@ class ProductSerializer(serializers.ModelSerializer):
             "get_thumbnail"
         )
 
-
-class OrderSerializer(serializers.ModelSerializer):
+class ProductaddSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Order
-        fields = '__all__'
+        model = Product
+        fields = (
+            'id',
+            'name',
+            'price',
+            'category',
+            'description',
+            'image',
+            'get_absolute_url',
+            'get_image',
+            'get_thumbnail',
+        )           
+
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +59,6 @@ class OrderSerializer(serializers.ModelSerializer):
             'zipcode',
             'place',
             'phone',
-            'stripe_token',
             'items',
         )  
 

@@ -9,6 +9,7 @@ from .managers import CustomUserManager
 from PIL import Image
 
 from django.core.validators import RegexValidator
+from django.utils.text import slugify
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -44,16 +45,20 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=6,decimal_places=2)
+    price = models.DecimalField(max_digits=8,decimal_places=2)
     category = models.ForeignKey(Category,related_name='products',on_delete=models.CASCADE)
     description = models.TextField(blank=True,null=True)
-    slug = models.SlugField()
+    slug = models.SlugField(default="",null=False)
     date_posted = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='uploads/',blank=True,null=True)
     thumbnail = models.ImageField(upload_to='uploads/',blank=True,null=True)
 
     class Meta:
         ordering = ['-date_posted']
+    
+    def save(self,*args,**kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args,**kwargs)
 
     def __str__(self):
         return self.name
@@ -101,9 +106,7 @@ class Order(models.Model):
     place = models.CharField(max_length=255)
     phone = models.CharField(max_length=255, validators=[RegexValidator(regex=r'^(06|05|07|03)\d{8}$', message='Enter a valid phone number')])
     created_at = models.DateTimeField(auto_now_add=True)
-    paid_amount = models.DecimalField(max_digits=8,decimal_places=2,blank=True,null=True)
-    stripe_token = models.CharField(max_length=100)
-
+    
     class Meta:
         ordering = ['-created_at',]
 
